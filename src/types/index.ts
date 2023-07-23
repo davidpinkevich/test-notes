@@ -1,4 +1,6 @@
-interface INote {
+import { ChangeEvent } from 'react';
+
+export interface INote {
   id: number;
   text: string;
   hash: Array<string>;
@@ -18,3 +20,13 @@ export type TCreateText = {
 export type TStore = {
   notes: IInitialState;
 };
+
+export type TViewHashes = {
+  text: string;
+};
+
+export interface ITextInput {
+  text: string;
+  errorText: boolean;
+  changeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+}
