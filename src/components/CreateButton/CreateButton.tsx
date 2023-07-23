@@ -23,7 +23,7 @@ export const CreateButton = () => {
     }
   };
   return (
-    <Button onClick={add} radius="md" size="20px" p="md">
+    <Button onClick={add} radius="md" size="20px" p="md" w={160}>
       Добавить
     </Button>
   );

@@ -31,6 +31,7 @@ export interface ITextInput {
   text: string;
   errorText?: boolean;
   place: string;
+  disabled: boolean;
   changeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -40,4 +41,10 @@ export interface IItem {
 
 export type TDelete = {
   id: string;
+};
+
+export type TRedactor = {
+  id: string;
+  activeChange: boolean;
+  changeActive: (value: boolean) => void;
 };

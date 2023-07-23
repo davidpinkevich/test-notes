@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const findTag = (text: string) => {
+export const findTag = (text: string, disabled: boolean) => {
   const textArray = text.split('').reduce((accum: Array<string>, item: string) => {
     if (!accum.length) {
       accum.push(item);
@@ -29,7 +29,7 @@ export const findTag = (text: string) => {
   const mirror = arrayWithHash.map((item) => {
     if (item !== undefined && /\#\S+/.test(item))
       return (
-        <span key={uuidv4()} style={{ color: 'rgb(28,126,214)' }}>
+        <span key={uuidv4()} style={{ color: disabled ? 'rgba(28,126,214,0)' : 'rgb(28,126,214)' }}>
           {item}
         </span>
       );
@@ -43,8 +43,8 @@ export const findTag = (text: string) => {
   return { hashes, mirror };
 };
 
-export const createTags = (text: string) => {
-  const arr = findTag(text).hashes;
+export const createTags = (text: string, disabled: boolean) => {
+  const arr = findTag(text, disabled).hashes;
   const set = new Set(arr);
   return Array.from(set);
 };
