@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 export interface INote {
-  id: number;
+  id: string;
   text: string;
   hash: Array<string>;
 }
@@ -9,8 +9,10 @@ export interface INote {
 export interface IInitialState {
   currentText: string;
   currentLabels: Array<string>;
+  textItem: string;
+  labelItems: Array<string>;
   errorText: boolean;
-  notes: Array<INote> | null;
+  notes: Array<INote>;
 }
 
 export type TCreateText = {
@@ -27,6 +29,15 @@ export type TViewHashes = {
 
 export interface ITextInput {
   text: string;
-  errorText: boolean;
+  errorText?: boolean;
+  place: string;
   changeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
+
+export interface IItem {
+  id: string;
+}
+
+export type TDelete = {
+  id: string;
+};
