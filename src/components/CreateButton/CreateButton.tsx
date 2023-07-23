@@ -2,7 +2,7 @@ import { Button } from '@mantine/core';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeError, addNote, saveText, addCurrentLabel } from '../../redux/slice';
-import { TStore } from '../../types';
+import { TStore, INote } from '../../types';
 
 export const CreateButton = () => {
   const { currentText, currentLabels } = useSelector((state: TStore) => state.notes);
@@ -12,15 +12,19 @@ export const CreateButton = () => {
     if (currentText.length === 0) {
       dispatch(changeError(true));
     } else {
+      const item = { id: uuidv4(), text: currentText, hash: currentLabels };
       dispatch(changeError(false));
-      dispatch(addNote({ id: uuidv4(), text: currentText, hash: currentLabels }));
+      dispatch(addNote(item));
+      const arr: Array<INote> = JSON.parse(localStorage.getItem('notes-test') || '');
+      localStorage.setItem('notes-test', JSON.stringify([...arr, item]));
+
       dispatch(saveText(''));
       dispatch(addCurrentLabel([]));
     }
   };
   return (
     <Button onClick={add} radius="md" size="20px" p="md">
-      Создать Note
+      Добавить
     </Button>
   );
 };

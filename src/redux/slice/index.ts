@@ -15,17 +15,27 @@ const notesSlice = createSlice({
     saveText: (state, action) => {
       state.currentText = action.payload;
     },
+    changeError: (state, action) => {
+      state.errorText = action.payload;
+    },
     addCurrentLabel: (state, action) => {
-      state.currentLabels.push(action.payload);
+      state.currentLabels = [...action.payload];
     },
     addNote: (state, action) => {
       state.notes
         ? state.notes.push({
             id: action.payload.id,
             text: action.payload.text,
-            hash: [],
+            hash: action.payload.hash,
           })
-        : { id: action.payload.id, text: action.payload.text, hash: [], main: false };
+        : (state.notes = [
+            {
+              id: action.payload.id,
+              text: action.payload.text,
+              hash: action.payload.hash,
+              // main: false,
+            },
+          ]);
     },
   },
 });
@@ -33,4 +43,4 @@ const notesSlice = createSlice({
 const { actions, reducer } = notesSlice;
 
 export default reducer;
-export const { addNote, saveText, addCurrentLabel } = actions;
+export const { addNote, saveText, addCurrentLabel, changeError } = actions;
