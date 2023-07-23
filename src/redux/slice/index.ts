@@ -8,6 +8,8 @@ const initialState: IInitialState = {
   currentLabels: [],
   errorText: false,
   notes: [],
+  filter: [],
+  viewFilterItems: [],
 };
 
 const notesSlice = createSlice({
@@ -16,6 +18,12 @@ const notesSlice = createSlice({
   reducers: {
     saveText: (state, action) => {
       state.currentText = action.payload;
+    },
+    addFilter: (state, action) => {
+      state.filter = [...action.payload];
+    },
+    startFilter: (state, action) => {
+      state.viewFilterItems = action.payload;
     },
     viewTextItem: (state, action) => {
       state.textItem = action.payload;
@@ -67,4 +75,6 @@ export const {
   viewTextItem,
   addLabelsItem,
   changeNote,
+  addFilter,
+  startFilter,
 } = actions;

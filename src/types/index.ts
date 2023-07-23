@@ -13,6 +13,8 @@ export interface IInitialState {
   labelItems: Array<string>;
   errorText: boolean;
   notes: Array<INote>;
+  filter: Array<string>;
+  viewFilterItems: Array<string>;
 }
 
 export type TCreateText = {
