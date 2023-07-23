@@ -1,4 +1,4 @@
-import { Flex } from '@mantine/core';
+import { Flex, Paper } from '@mantine/core';
 import { TextInput } from '../TextInput/TextInput';
 import { CreateButton } from '../CreateButton/CreateButton';
 import { ChangeEvent } from 'react';
@@ -14,13 +14,21 @@ export const CreateNote = () => {
   const changeText = (event: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(saveText(event.target.value));
     dispatch(changeError(false));
-    dispatch(addCurrentLabel(createTags(event.target.value)));
+    dispatch(addCurrentLabel(createTags(event.target.value, true)));
   };
 
   return (
-    <Flex mt={50} gap="md" justify="center" align="flex-start">
-      <TextInput text={currentText} errorText={errorText} changeText={changeText} />
-      <CreateButton />
-    </Flex>
+    <Paper shadow="xl" radius="md" pt={50} pr={70} pb={50} pl={45} mt={50}>
+      <Flex gap="md" justify="center" align="flex-start">
+        <TextInput
+          disabled={false}
+          place="Создание новой заметки"
+          text={currentText}
+          errorText={errorText}
+          changeText={changeText}
+        />
+        <CreateButton />
+      </Flex>
+    </Paper>
   );
 };
